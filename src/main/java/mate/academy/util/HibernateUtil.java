@@ -11,6 +11,11 @@ public class HibernateUtil {
     }
 
     private static SessionFactory initSessionFactory() {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException("Can't load JDBC driver", e);
+        }
         return new Configuration().configure().buildSessionFactory();
     }
 
